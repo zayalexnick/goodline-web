@@ -1,12 +1,21 @@
 import * as React from 'react';
 import { inject, observer } from 'mobx-react';
 import { map } from 'lodash';
-import { PropsInterface, StateInterface } from './interfaces';
-import { NewsItemInterface } from '~/scenes/News/Item/interfaces'
+import NewsItemInterface from '~/scenes/News/interfaces/NewsItemInterface'
 import { Item, Image, Category, Title, Description, Container } from './styles';
 import PendingEnum from '~/mobx/enums/PendingEnum';
 import { Container as LoaderContainer } from '~/components/Loader';
 import ResponsiveContainer from '~/components/ResponsiveContainer';
+import { RouteComponentProps } from 'react-router-dom';
+import NewsListStore from './store/NewsListStore';
+
+interface PropsInterface extends RouteComponentProps<any> {
+    NewsList: NewsListStore
+}
+
+interface StateInterface {
+    
+}
 
 const NewsItem: React.SFC<NewsItemInterface> = ({ id, title, image, category, description }) => (
     <Item to={`/news/${id}`}>

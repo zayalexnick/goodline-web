@@ -1,6 +1,13 @@
 import * as React from 'react';
-import { PropsInterface, StateInterface } from './interfaces';
 import { Container } from './styles';
+
+interface PropsInterface {
+
+}
+
+interface StateInterface {
+    
+}
 
 export default class MainScene extends React.Component<PropsInterface, StateInterface>
 {

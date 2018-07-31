@@ -1,39 +1,35 @@
-import { observable, action, computed } from 'mobx';
-import { List } from 'immutable';
+import { observable, action, computed, runInAction } from 'mobx';
 import { AxiosResponse } from 'axios';
-
 import BaseStore from '~/mobx/BaseStore';
-import StoreInterface from '~/mobx/interfaces/StoreInterface';
 import PendingEnum from '~/mobx/enums/PendingEnum';
-import { NewsItemInterface } from '~/scenes/News/Item/interfaces';
-
 import Api from '~/api';
+import NewsItemInterface from '~/scenes/News/interfaces/NewsItemInterface';
 
 
-export default class NewsListStore extends BaseStore implements StoreInterface
+export default class NewsListStore extends BaseStore
 {
-    @observable pending: PendingEnum = PendingEnum.Clear;
-    @observable error: string;
-    @observable list: List<NewsItemInterface> = List();
+    @observable list: NewsItemInterface[] = [];
 
     @action
     async request()
     {
         try
         {
-            this.pending = PendingEnum.Loading;
+            runInAction(() => this.pending = PendingEnum.Loading);
 
             const response: AxiosResponse = await Api.list();
             
-            this.list = List(response.data as NewsItemInterface[]);
-
-            this.pending = PendingEnum.Loaded;
-
+            runInAction(() => {
+                this.list = response.data as NewsItemInterface[];
+                this.pending = PendingEnum.Loaded;
+            });
         }
         catch(e)
         {
-            this.error = e.message as string;
+            runInAction(() => {
+                this.error = e.message as string;
             this.pending = PendingEnum.Failed;
+            });            
         }
     }
 

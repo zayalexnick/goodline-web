@@ -1,10 +1,19 @@
 import * as React from 'react';
 import { inject, observer } from 'mobx-react';
-import { StateInterface, PropsInterface } from './interfaces';
 import PendingEnum from '~/mobx/enums/PendingEnum';
 import { Container as LoaderContainer } from '~/components/Loader';
 import ResponsiveContainer from '~/components/ResponsiveContainer';
 import { Title, Content, Container } from './styles';
+import { RouteComponentProps } from 'react-router-dom';
+import NewsItemStore from './store/NewsItemStore';
+
+interface PropsInterface extends RouteComponentProps<any> {
+    NewsItem: NewsItemStore;
+}
+
+interface StateInterface {
+
+}
 
 @inject('NewsItem')
 @observer
@@ -28,13 +37,13 @@ export default class NewsItemScene extends React.Component<PropsInterface, State
 
         return (
             <div>
-                <LoaderContainer loading={pending === PendingEnum.Loading}>
+                <LoaderContainer loading={pending !== PendingEnum.Loaded}>
                     <Container>
-                        <Title background={item.get('image') as string}>
-                            <span>{ item.get('title') }</span>
+                        <Title background={item.image as string}>
+                            <span>{ item.title }</span>
                         </Title>
                         <ResponsiveContainer>
-                            <Content dangerouslySetInnerHTML={{ __html: item.get('content') as string }} />
+                            <Content dangerouslySetInnerHTML={{ __html: item.content }} />
                         </ResponsiveContainer>
                     </Container>
                 </LoaderContainer>

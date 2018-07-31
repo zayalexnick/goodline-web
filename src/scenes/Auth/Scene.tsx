@@ -1,11 +1,20 @@
 import * as React from 'react';
 import { inject, observer } from 'mobx-react';
 import { Redirect } from 'react-router-dom';
-import { PropsInterface, StateInterface } from './interfaces';
 import ResponsiveContainer from '~/components/ResponsiveContainer';
 import Button from '~/components/Button';
 import { Container, Input, ErrorMessage } from './styles';
 import PendingEnum from '~/mobx/enums/PendingEnum';
+import { Store as AuthStore } from "~/scenes/Auth";
+
+interface PropsInterface {
+    Auth: AuthStore
+}
+
+interface StateInterface {
+    login: string;
+    password: string;
+}
 
 @inject('Auth')
 @observer

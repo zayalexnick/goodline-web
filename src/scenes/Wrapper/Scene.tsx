@@ -1,6 +1,9 @@
 import * as React from 'react';
-import { PropsInterface } from './interfaces';
 import Header from '~/modules/Header';
+
+interface PropsInterface {
+    
+}
 
 const Wrapper = <WrappedProps extends PropsInterface>(WrappedComponent: React.ComponentType<WrappedProps>) => class Wrapper extends React.Component<WrappedProps>
 {
