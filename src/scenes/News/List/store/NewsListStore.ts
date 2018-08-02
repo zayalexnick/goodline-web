@@ -28,8 +28,8 @@ export default class NewsListStore extends BaseStore
         {
             runInAction(() => {
                 this.error = e.message as string;
-            this.pending = PendingEnum.Failed;
-            });            
+                this.pending = PendingEnum.Failed;
+            });
         }
     }
 
