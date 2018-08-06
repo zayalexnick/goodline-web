@@ -21,9 +21,13 @@ mock.onGet('/api/news/1?_expand=category').reply(200, response)
 
 
 describe('NewsListStore tests', () => {
-    it('Signin test', async () => {
-        const store = new NewsItemStore();
-    
+    let store: NewsItemStore;
+
+    beforeEach(() => {
+        store = new NewsItemStore;
+    })
+
+    it('Signin test', async () => {    
         await store.request(1);
         expect(store.pending).toBe(PendingEnum.Loaded);
         expect(store.item).toEqual(response);

@@ -5,15 +5,14 @@ import ResponsiveContainer from '~/components/ResponsiveContainer';
 import Button from '~/components/Button';
 import { Container, Input, ErrorMessage } from './styles';
 import PendingEnum from '~/mobx/enums/PendingEnum';
-import { Store as AuthStore } from "~/scenes/Auth";
+import AuthStore from './store/AuthStore';
 
 interface PropsInterface {
     Auth: AuthStore
 }
 
 interface StateInterface {
-    login: string;
-    password: string;
+    
 }
 
 @inject('Auth')
@@ -31,7 +30,7 @@ export default class AuthScene extends React.Component<PropsInterface, StateInte
         this.props.Auth.signin(login, password);
     }
 
-    render(): JSX.Element
+    render()
     {
         const { authorized, error, pending } = this.props.Auth;
         const { login, password } = this.state;

@@ -1,12 +1,9 @@
-import { observable, action, computed } from 'mobx';
-
+import { observable, action } from 'mobx';
 import { Authentication } from '~/utils/Authorization';
-
 import BaseStore from '~/mobx/BaseStore';
-import StoreInterface from '~/mobx/interfaces/StoreInterface';
 import PendingEnum from '~/mobx/enums/PendingEnum';
 
-export default class AuthStore extends BaseStore implements StoreInterface
+export default class AuthStore extends BaseStore
 {
     @observable pending: PendingEnum = PendingEnum.Clear;
     @observable error: string;

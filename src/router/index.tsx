@@ -1,24 +1,23 @@
 import * as React from 'react';
-import { BrowserRouter, Route, Switch, RouteProps } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { map } from 'lodash';
-import { PropsInterface, StateInterface } from './interfaces';
 
 import routes from './routes';
 import Wrapper from '~/scenes/Wrapper';
 
-const RouteComponent: React.SFC = (props: RouteProps): JSX.Element => (
+const RouteComponent: React.SFC<any> = (props) => (
     <Route { ...props } />
 );
 
 @Wrapper
-export default class Router extends React.Component<PropsInterface, StateInterface>
+export default class Router extends React.Component
 {
 
     render()
     {
         return (
             <Switch>
-                { map(routes, (route: RouteProps, index: number): JSX.Element => <RouteComponent  key={index} { ...route } />) }
+                { map(routes, (route, index) => <RouteComponent  key={index} { ...route } />) }
             </Switch>
         );
     }

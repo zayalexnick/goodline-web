@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { inject, observer } from 'mobx-react';
-import { map } from 'lodash';
 import NewsItemInterface from '~/scenes/News/interfaces/NewsItemInterface'
 import { Item, Image, Category, Title, Description, Container } from './styles';
 import PendingEnum from '~/mobx/enums/PendingEnum';
